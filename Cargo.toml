@@ -1,0 +1,28 @@
+[package]
+name = "async-soft-clock"
+version = "0.1.0"
+edition = "2021"
+authors = ["Joshua Gerrish <jgerrish@gmail.com>"]
+description = "Library for simulating clocks"
+keywords = ["clock", "embedded", "async"]
+readme = "README.md"
+repository = "https://github.com/jgerrish/async-soft-clock"
+homepage = "https://github.com/jgerrish/async-soft-clock"
+license = "MIT"
+
+[dependencies]
+config = "0.13"
+log = "0.4"
+env_logger = "0.9"
+futures = { version = "0.3" }
+futures-executor = { version = "0.3" }
+tokio = { version = "1.19", optional = true, features = ["time", "rt", "macros", "io-std"] }
+tokio-util = { version = "0.7", optional = true }
+
+[features]
+# These features use similar naming as the Criterion crate, which also
+# supports pluggable runtimes and executors.
+default = ["async_tokio"]
+
+# Use the Tokio crate
+async_tokio = ["dep:tokio", "dep:tokio-util"]
